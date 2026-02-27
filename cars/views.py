@@ -1,17 +1,10 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
-
-html = '''
-    <!DOCTYPE html>
-        <html lang="pt-br">
-        <head>
-            <title>Meus Carros</title>
-        </head>
-        <body>
-            <h1>Meus Carros</h1>
-        </body>
-    </html>
-'''
 
 def  cars_view(request):
-    return HttpResponse(html)
+    return render(
+        request,
+         'cars.html', 
+         {'cars':{'model': 'Fusca'}}
+    )
+    
