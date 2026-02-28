@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from cars.models import Car, Brand
+from cars.forms import CarForm
 
 
 def cars_view(request):
@@ -16,3 +17,6 @@ def cars_view(request):
          {'cars': cars}
     )
     
+def new_car_view(request):
+    new_car_view = CarForm()
+    return render(request, 'new_car.html', {'new_car_form': new_car_view})
