@@ -46,3 +46,12 @@ class CarDeleteView(DeleteView):
     model = Car
     template_name = 'car_delete.html'
     success_url = '/cars/'
+
+    ## Exclui a foto do carro ao deletar o registro do banco de dados
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.photo:
+            self.object.photo.delete(save=False)
+
+        return super().post(request, *args, **kwargs)
