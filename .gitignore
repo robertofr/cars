@@ -2,3 +2,4 @@ venv_cars
 db.sqlite3
 media/cars/*
 !media/cars/default.png
+.vscode/
