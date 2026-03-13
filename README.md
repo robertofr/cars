@@ -1,25 +1,32 @@
 # 🚗 Cars - Django Project
 
-Um projeto Django moderno e bem estruturado para gerenciamento de automóveis.
+Um projeto Django para gerenciamento completo de automóveis, incluindo cadastro de carros, marcas, inventário automático e sistema de autenticação de usuários.
 
 ## 📋 Descrição
 
-O **Cars** é uma aplicação web desenvolvida com Django que fornece uma plataforma completa para gerenciar informações sobre veículos, incluindo cadastro, consulta e administração de dados relacionados a automóveis.
+O **Cars** é uma aplicação web desenvolvida com Django que permite aos usuários gerenciar uma frota de veículos. Inclui funcionalidades para cadastrar carros com detalhes como modelo, marca, anos de fabricação, placa, valor, foto e biografia. O sistema mantém um inventário automático atualizado via sinais (signals) do Django e oferece uma interface administrativa completa. Além disso, inclui um sistema de autenticação para usuários se registrarem e fazerem login.
 
 ## 🎯 Funcionalidades
 
-- ✅ Gerenciamento de veículos
-- ✅ Interface administrativa intuitiva
-- ✅ API RESTful para integração
-- ✅ Banco de dados SQLite integrado
-- ✅ Sistema de autenticação do Django
+- ✅ Cadastro, edição e exclusão de carros
+- ✅ Gerenciamento de marcas de veículos
+- ✅ Upload de fotos para os carros
+- ✅ Inventário automático com contagem e valor total dos carros
+- ✅ Sistema de autenticação de usuários (registro e login)
+- ✅ Interface administrativa do Django
+- ✅ Templates responsivos para visualização e gerenciamento
+- ✅ Banco de dados SQLite para desenvolvimento
 
 ## 🛠️ Tecnologias Utilizadas
 
 - **Framework**: Django 6.0.2
 - **Linguagem**: Python 3.12
-- **Banco de Dados**: SQLite
+- **Banco de Dados**: SQLite (desenvolvimento)
 - **Gerenciador de Pacotes**: pip
+- **Bibliotecas Adicionais**:
+  - Pillow (para manipulação de imagens)
+  - httpx (para requisições HTTP)
+  - pydantic (para validação de dados)
 - **WSGI**: Python WSGI HTTP Server
 
 ## 📦 Pré-requisitos
@@ -100,16 +107,42 @@ cars/
 │   ├── settings.py          # Configurações do projeto
 │   ├── urls.py              # Rotas principais
 │   ├── wsgi.py              # Configuração WSGI
-│   └── asgi.py              # Configuração ASGI
-├── cars/                     # Aplicação principal
-│   ├── models.py            # Modelos de dados
-│   ├── views.py             # Lógica das visualizações
+│   ├── asgi.py              # Configuração ASGI
+│   └── templates/
+│       └── base.html        # Template base
+├── accounts/                 # App de autenticação
+│   ├── models.py            # Modelos de usuário (se houver)
+│   ├── views.py             # Views para login/registro
 │   ├── admin.py             # Configuração do admin
+│   ├── apps.py              # Configuração do app
+│   ├── tests.py             # Testes
+│   ├── migrations/          # Migrações
+│   └── templates/
+│       ├── login.html       # Template de login
+│       └── register.html    # Template de registro
+├── cars/                     # App principal para gerenciamento de carros
+│   ├── models.py            # Modelos: Car, Brand, CarInventory
+│   ├── views.py             # Views para CRUD de carros
+│   ├── admin.py             # Configuração do admin
+│   ├── forms.py             # Formulários para carros
+│   ├── signal.py            # Sinais para atualizar inventário
+│   ├── apps.py              # Configuração do app
+│   ├── tests.py             # Testes
 │   ├── urls.py              # Rotas da aplicação
-│   └── migrations/          # Migrações do banco de dados
+│   ├── migrations/          # Migrações do banco de dados
+│   └── templates/
+│       ├── cars.html        # Lista de carros
+│       ├── car_detail.html  # Detalhes do carro
+│       ├── new_car.html     # Formulário para novo carro
+│       ├── car_update.html  # Formulário para editar carro
+│       └── car_delete.html  # Confirmação de exclusão
+├── media/                   # Arquivos de mídia (fotos dos carros)
+│   └── cars/                # Diretório para fotos dos carros
 ├── manage.py                # Utilitário de gerenciamento Django
 ├── db.sqlite3               # Banco de dados SQLite
-└── venv_cars/               # Ambiente virtual Python
+├── requirements.txt         # Dependências Python
+├── venv_cars/               # Ambiente virtual Python
+└── README.md                # Este arquivo
 ```
 
 ## 🔧 Configurações Importantes
@@ -125,7 +158,17 @@ As principais configurações do projeto estão em `app/settings.py`:
 
 ## 📚 Modelos
 
-A aplicação utiliza modelos Django para definir a estrutura de dados. Verifique `cars/models.py` para mais detalhes.
+A aplicação utiliza os seguintes modelos Django em `cars/models.py`:
+
+- **Brand**: Representa as marcas dos carros (ex: Toyota, Ford).
+  - Campos: id, name
+
+- **Car**: Modelo principal para os veículos.
+  - Campos: id, model, brand (FK), factory_year, model_year, plate, value, photo, bio
+
+- **CarInventory**: Mantém o inventário automático dos carros.
+  - Campos: cars_count, cars_value, created_at
+  - Atualizado automaticamente via sinais (signals) quando carros são criados/editados/excluídos.
 
 ## 🧪 Testes
 
@@ -189,4 +232,4 @@ Para dúvidas ou sugestões, abra uma issue no repositório.
 
 **Desenvolvido com ❤️ usando Django**
 
-*Última atualização: 23 de fevereiro de 2026*
+*Última atualização: 13 de março de 2026*
