@@ -3,3 +3,11 @@ db.sqlite3
 media/cars/*
 !media/cars/default.png
 .vscode/
+
+__pycache__/
+*.pyc
+*.pyo
+.env
+db.sqlite3
+media/
+staticfiles/
