@@ -232,4 +232,4 @@ Para dúvidas ou sugestões, abra uma issue no repositório.
 
 **Desenvolvido com ❤️ usando Django**
 
-*Última atualização: 13 de março de 2026*
+*Última atualização: 17 de março de 2026*
